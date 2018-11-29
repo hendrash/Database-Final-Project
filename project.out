@@ -1,0 +1,406 @@
+SQL> SET ECHO ON
+SQL> 
+SQL> DELETE FROM Customers;
+
+7 rows deleted.
+
+SQL> DELETE FROM CreditCards;
+
+5 rows deleted.
+
+SQL> DELETE FROM Orders;
+
+8 rows deleted.
+
+SQL> DELETE FROM Product;
+
+6 rows deleted.
+
+SQL> DELETE FROM ProductsInOrder;
+
+10 rows deleted.
+
+SQL> DELETE FROM Review;
+
+7 rows deleted.
+
+SQL> DELETE FROM Seller;
+
+2 rows deleted.
+
+SQL> DELETE FROM Shipping;
+
+3 rows deleted.
+
+SQL> 
+SQL> 
+SQL> DROP TABLE Customers;
+
+Table dropped.
+
+SQL> DROP TABLE CreditCards;
+
+Table dropped.
+
+SQL> DROP TABLE Orders;
+
+Table dropped.
+
+SQL> DROP TABLE Product;
+
+Table dropped.
+
+SQL> DROP TABLE ProductsInOrder;
+
+Table dropped.
+
+SQL> DROP TABLE Review;
+
+Table dropped.
+
+SQL> DROP TABLE Seller;
+
+Table dropped.
+
+SQL> DROP TABLE Shipping;
+
+Table dropped.
+
+SQL> 
+SQL> CREATE TABLE Customers (
+  2    custEmail VARCHAR(20) PRIMARY KEY,
+  3    cName VARCHAR(20) NOT NULL,
+  4    cAddress VARCHAR(20) NOT NULL,
+  5    cCardNum VARCHAR(16) NOT NULL
+  6  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE CreditCards (
+  2    cardNumber INTEGER PRIMARY KEY,
+  3    securityCode INTEGER NOT NULL,
+  4    expDate CHAR(7) NOT NULL
+  5  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> -- --------------------------------------------------------
+SQL> 
+SQL> --
+SQL> -- Table structure for table Orders
+SQL> --
+SQL> 
+SQL> CREATE TABLE Orders (
+  2    oID INTEGER PRIMARY KEY,
+  3    oEmail VARCHAR(20) NOT NULL,
+  4    oShipID INTEGER NOT NULL,
+  5    oDate CHAR(10)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> -- --------------------------------------------------------
+SQL> 
+SQL> --
+SQL> -- Table structure for table Product
+SQL> --
+SQL> 
+SQL> CREATE TABLE Product (
+  2    productID INTEGER PRIMARY KEY,
+  3    pName CHAR(15) NOT NULL,
+  4    price INTEGER NOT NULL,
+  5    onSale CHAR(1) DEFAULT 'N',
+  6    salePrice DECIMAL(10,0) NOT NULL,
+  7    quantity INTEGER NOT NULL,
+  8    description VARCHAR(20) NOT NULL,
+  9    imgURL VARCHAR(20) NOT NULL,
+ 10    sCompany CHAR(20) NOT NULL
+ 11  );
+
+Table created.
+
+SQL> 
+SQL> -- --------------------------------------------------------
+SQL> 
+SQL> --
+SQL> -- Table structure for table ProductsInOrder
+SQL> --
+SQL> 
+SQL> CREATE TABLE ProductsInOrder (
+  2    orderID INTEGER NOT NULL,
+  3    productID INTEGER NOT NULL,
+  4    quantity INTEGER NOT NULL
+  5  );
+
+Table created.
+
+SQL> 
+SQL> -- --------------------------------------------------------
+SQL> 
+SQL> --
+SQL> -- Table structure for table Review
+SQL> --
+SQL> 
+SQL> CREATE TABLE Review (
+  2    custEmail VARCHAR(20),
+  3    pID INTEGER,
+  4    rating CHAR(1) NOT NULL,
+  5    description VARCHAR(20) NOT NULL,
+  6    rDate CHAR(10),
+  7    PRIMARY KEY(custEmail, pID)
+  8  );
+
+Table created.
+
+SQL> 
+SQL> -- --------------------------------------------------------
+SQL> 
+SQL> --
+SQL> -- Table structure for table Seller
+SQL> --
+SQL> 
+SQL> CREATE TABLE Seller (
+  2    email VARCHAR(20) PRIMARY KEY,
+  3    companyName VARCHAR(20) NOT NULL,
+  4    address VARCHAR(20),
+  5    phoneNum VARCHAR(16) NOT NULL
+  6  );
+
+Table created.
+
+SQL> 
+SQL> -- --------------------------------------------------------
+SQL> 
+SQL> --
+SQL> -- Table structure for table Shipping
+SQL> --
+SQL> 
+SQL> CREATE TABLE Shipping (
+  2    shipID INTEGER PRIMARY KEY,
+  3    type VARCHAR(20) NOT NULL,
+  4    sPrice INTEGER NOT NULL
+  5  );
+
+Table created.
+
+SQL> 
+SQL> -------------------------------------------------------------------------
+SQL> -- Insert data
+SQL> -------------------------------------------------------------------------
+SQL> insert into Customers values('tom@mail.com','tom','t street','00001');
+
+1 row created.
+
+SQL> insert into Customers values('jim@mail.com','jim','j street','00002');
+
+1 row created.
+
+SQL> insert into Customers values('bob@mail.com','Bob','c street','00003');
+
+1 row created.
+
+SQL> insert into Customers values('cam@mail.com','cam','c street','00004');
+
+1 row created.
+
+SQL> insert into Customers values('thm@mail.com','tom','b street','00005');
+
+1 row created.
+
+SQL> insert into Customers values('max@mail.com','max','c street','00002');
+
+1 row created.
+
+SQL> insert into Customers values('jan@mail.com','jan','j street','00001');
+
+1 row created.
+
+SQL> 
+SQL> insert into CreditCards values ('00001','001','1/11');
+
+1 row created.
+
+SQL> insert into CreditCards values ('00002','001','1/11');
+
+1 row created.
+
+SQL> insert into CreditCards values ('00003','002','1/11');
+
+1 row created.
+
+SQL> insert into CreditCards values ('00004','002','1/12');
+
+1 row created.
+
+SQL> insert into CreditCards values ('00005','001','1/12');
+
+1 row created.
+
+SQL> 
+SQL> insert into Orders values ('0001','tom@mail.com','01','12/01');
+
+1 row created.
+
+SQL> insert into Orders values ('0003','tom@mail.com','02','12/01');
+
+1 row created.
+
+SQL> insert into Orders values ('0005','thm@mail.com','03','12/01');
+
+1 row created.
+
+SQL> insert into Orders values ('0006','thm@mail.com','03','11/30');
+
+1 row created.
+
+SQL> insert into Orders values ('0007','max@mail.com','01','11/30');
+
+1 row created.
+
+SQL> insert into Orders values ('0008','max@mail.com','01','11/31');
+
+1 row created.
+
+SQL> insert into Orders values ('0009','bob@mail.com','01','11/31');
+
+1 row created.
+
+SQL> insert into Orders values ('0002','jan@mail.com','01','12/01');
+
+1 row created.
+
+SQL> 
+SQL> insert into Product values('101','hat','3','Y','2','1','hat.com','walmart','where on head');
+
+1 row created.
+
+SQL> insert into Product values('102','hat','1','N','1','5','hat.com','walmart','where on head');
+
+1 row created.
+
+SQL> insert into Product values('103','bat','2','N','2','1','bat.com','dunhams','play baseball');
+
+1 row created.
+
+SQL> insert into Product values('104','axe','3','Y','2','1','axe.com','dunhams','chop somthing');
+
+1 row created.
+
+SQL> insert into Product values('106','axe','4','Y','3','2','axe.com','dunhams','chop somthing');
+
+1 row created.
+
+SQL> insert into Product values('105','mat','1','N','1','4','mat.com','walmart','keep on floor');
+
+1 row created.
+
+SQL> 
+SQL> insert into ProductsInOrder values('0001','101','1');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0002','105','1');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0003','106','1');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0004','104','2');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0005','102','1');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0006','103','1');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0007','101','5');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0008','104','9');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0009','101','4');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0002','101','1');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0007','105','1');
+
+1 row created.
+
+SQL> insert into ProductsInOrder values('0007','106','1');
+
+1 row created.
+
+SQL> 
+SQL> insert into Review values('tom@mail.com','101','0','hat is bad ','01/01');
+
+1 row created.
+
+SQL> insert into Review values('thm@mail.com','101','5','hat is good','01/02');
+
+1 row created.
+
+SQL> insert into Review values('tom@mail.com','102','0','hat is bad ','01/02');
+
+1 row created.
+
+SQL> insert into Review values('max@mail.com','104','3','axe alright','01/03');
+
+1 row created.
+
+SQL> insert into Review values('tom@mail.com','105','2','mat is mhhh','01/03');
+
+1 row created.
+
+SQL> insert into Review values('jan@mail.com','105','4','mat is cool','01/01');
+
+1 row created.
+
+SQL> insert into Review values('tom@mail.com','106','5','axe is bad ','01/01');
+
+1 row created.
+
+SQL> 
+SQL> insert into Shipping values('01','1 Day','5');
+
+1 row created.
+
+SQL> insert into Shipping values('02','5 Day','4');
+
+1 row created.
+
+SQL> insert into Shipping values('105','9 Day','0');
+
+1 row created.
+
+SQL> 
+SQL> insert into Seller values('walmart','a street','(616)333-3333','walmart.com');
+
+1 row created.
+
+SQL> insert into Seller values('dunhams','b street','(517)111-1111','dunhams.com');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SPOOL OFF
